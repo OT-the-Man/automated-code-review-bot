@@ -18,6 +18,7 @@ diff_response = requests.get(
         "Accept": "application/vnd.github.v3.diff"
     }
 )
+diff_response.raise_for_status()
 diff = diff_response.text
 
 # 2. Send it to Gemini for review
@@ -38,7 +39,7 @@ review = client.models.generate_content(
 ).text
 
 # 3. Post the review as a comment on the PR
-requests.post(
+comment_response = requests.post(
     f"https://api.github.com/repos/{repo}/issues/{pr_number}/comments",
     headers={
         "Authorization": f"Bearer {github_token}",
@@ -46,5 +47,6 @@ requests.post(
     },
     json={"body": f"### 🤖 AI Code Review\n\n{review}"}
 )
+comment_response.raise_for_status()
 
 print("Review posted.")
