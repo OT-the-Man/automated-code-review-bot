@@ -1,0 +1,20 @@
+diff --git a/calculator.py b/calculator.py
+index 83db48f..bf269c4 100644
+--- a/calculator.py
++++ b/calculator.py
+@@ -1,9 +1,14 @@
+ def add(a, b):
+     return a + b
+ 
+-def divide(a, b):
+-    return a / b
++def divide(a, b):
++    if b = 0:
++        return None
++    return a / b
++
++def get_average(numbers):
++    total = 0
++    for i in range(len(numbers) + 1):
++        total += numbers[i]
++    return total / len(numbers)
